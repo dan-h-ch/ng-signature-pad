@@ -17,7 +17,8 @@
       function ($window, $timeout) {
         return {
           scope: {
-            ngSignaturePad: '='
+            ngSignaturePad: '=',
+            ngSignaturePadDisabled: '='
           },
           link: function ($scope, $element, $attrs) {
             $timeout(function () {
@@ -68,7 +69,7 @@
               var oldAddPoint = $scope.ngSignaturePad._addPoint;
 
               $scope.ngSignaturePad._addPoint = function (point) {
-                oldAddPoint.call(this, point);
+                if (!$scope.ngSignaturePadDisabled) oldAddPoint.call(this, point);
 
                 $scope.$apply();
               };
